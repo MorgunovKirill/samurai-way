@@ -15,27 +15,3 @@ img {
     max-width: 1200px;
     margin: 0 auto;
 }
-
-.header {
-    grid-area: h;
-    background-color: red;
-}
-
-.header img {
-    width: 50px;
-}
-
-.nav {
-    grid-area: n;
-    background-color: green;
-}
-
-.content {
-    grid-area: c;
-    background-color: blue;
-}
-
-.footer {
-    grid-area: f;
-    background-color: yellow;
-}
