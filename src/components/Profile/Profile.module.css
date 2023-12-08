@@ -3,6 +3,11 @@
     background-color: blue;
 }
 
-.item {
-    color: red;
+.descriptionContainer {
+    display: flex;
+}
+
+.descriptionContainer img {
+    width: 100px;
+    height: 100px;
 }
