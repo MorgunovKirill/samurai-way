@@ -11,8 +11,8 @@ export const Posts = () => {
                 </div>
             </div>
             <div>
-                <Post message={'Hello world!'} />
-                <Post message={'It\'s my first message!'}/>
+                <Post message={'Hello world!'}  likesCount={3} />
+                <Post message={'It\'s my first message!'} likesCount={15}/>
             </div>
         </>
     )

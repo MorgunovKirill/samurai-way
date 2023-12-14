@@ -6,3 +6,8 @@
 .item {
     color: #ffffff;
 }
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}
