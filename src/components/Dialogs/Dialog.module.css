@@ -1,0 +1,32 @@
+.wrapper {
+    padding: 0 20px;
+}
+
+.wrapper h1 {
+    margin: 0 0 20px 0;
+}
+
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItems {
+    padding: 10px;
+}
+
+.dialogsItems .active {
+    color: gold;
+}
+
+.dialog {
+
+}
+
+.messages {
+    padding: 10px;
+}
+
+.message {
+
+}

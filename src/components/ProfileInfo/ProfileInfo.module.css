@@ -1,0 +1,9 @@
+.descriptionContainer {
+    display: flex;
+    padding: 20px;
+}
+
+.descriptionContainer img {
+    width: 100px;
+    height: 100px;
+}
