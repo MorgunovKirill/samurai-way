@@ -1,44 +1,44 @@
-import React, {FC} from "react";
+import React from "react";
 import styles from "./Dialog.module.css"
-import {NavLink} from "react-router-dom";
-
-type DialogItemPropsType = {
-    id: string
-    name: string
-}
-
-type MessageItemPropsType = {
-    text: string
-}
-
-const DialogItem: FC<DialogItemPropsType> = ({id, name}) => {
-    return  <div className={styles.dialog + ' ' + styles.active}>
-        <NavLink to={`/dialogs/${id}`}>{name}</NavLink>
-    </div>
-}
-
-const MessageItem: FC<MessageItemPropsType> = ({ text}) => {
-    return <div className={styles.message}>{text}</div>
-}
+import DialogItem from "./DialogItem/DialogItem";
+import {MessageItem} from "./MessageItem/MessageItem";
 
 const Dialogs = () => {
+    const dialogsData = [
+        {id: '1', name: 'Ivan'},
+        {id: '2', name: 'Vasiliy'},
+        {id: '3', name: 'Katya'},
+        {id: '4', name: 'John'},
+        {id: '5', name: 'Emery'},
+        {id: '6', name: 'Dmitriy'},
+    ]
+
+    const messagesData = [
+        {id: '1', text: 'Hi'},
+        {id: '2', text: 'How are you?'},
+        {id: '3', text: 'Great!'},
+        {id: '4', text: 'Yo'},
+        {id: '5', text: 'YoYo'},
+        {id: '6', text: 'YoYo asdasd'},
+    ]
+
     return (
         <div className={styles.wrapper}>
             <h1>Dialogs</h1>
             <div className={styles.dialogs}>
                 <div className={styles.dialogsItems}>
-                    <DialogItem name='Ivan' id='1' />
-                    <DialogItem name='Vasiliy' id='2' />
-                    <DialogItem name='Katya' id='3' />
-                    <DialogItem name='John' id='4' />
-                    <DialogItem name='Emery' id='5' />
-                    <DialogItem name='Dmitriy' id='6' />
+                    {
+                        dialogsData.map(dialog => {
+                            return <DialogItem key={dialog.id} id={dialog.id} name={dialog.name} />
+                        })
+                    }
                 </div>
                 <div className={styles.messages}>
-                    <MessageItem text='Hi' />
-                    <MessageItem text='How are you?' />
-                    <MessageItem text='Great!' />
-                    <MessageItem text='Yo' />
+                    {
+                        messagesData.map(message => {
+                           return <MessageItem key={message.id} text={message.text} />
+                        })
+                    }
                 </div>
             </div>
         </div>

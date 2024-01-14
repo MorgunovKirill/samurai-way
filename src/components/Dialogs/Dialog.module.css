@@ -23,6 +23,11 @@
 
 }
 
+.dialog a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
 .messages {
     padding: 10px;
 }

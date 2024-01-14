@@ -1,8 +1,13 @@
-import React from "react";
+import React, {FC} from "react";
 import {Post} from "../Post/Post";
 import styles from "./Posts.module.css"
+import {PostsDataType} from "../../App";
 
-export const Posts = () => {
+type PostsPropsType = {
+    posts: PostsDataType[]
+}
+
+export const Posts:FC<PostsPropsType> = ({posts}) => {
     return (
         <div className={styles.posts}>
             <div>
@@ -12,8 +17,11 @@ export const Posts = () => {
                 </div>
             </div>
             <div>
-                <Post message={'Hello world!'}  likesCount={3} />
-                <Post message={'It\'s my first message!'} likesCount={15}/>
+                {
+                    posts.map(post => {
+                        return <Post key={post.id} message={post.text}  likesCount={post.likesCount} />
+                    })
+                }
             </div>
         </div>
     )
