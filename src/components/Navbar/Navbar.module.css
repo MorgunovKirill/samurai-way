@@ -16,3 +16,26 @@
     text-decoration: none;
     color: inherit;
 }
+
+.friends {
+    margin-top: 20px;
+}
+
+.friends h2 {
+    color: #ffffff;
+    margin: 0 0 15px 0;
+}
+
+.friends ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.friend {
+    color: #ffffff;
+    margin-right: 10px;
+}

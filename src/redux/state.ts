@@ -1,32 +1,35 @@
-import {PostsDataType} from "../App";
-
 export type PostType = {
     id: string
     text: string
     likesCount: number
 }
 
-type DialogType = {
+export type DialogType = {
     id: string
     name: string
 }
 
-type MessageType = {
+export type MessageType = {
     id: string
     text: string
 }
 
-type ProfilePageType = {
-    posts: PostsDataType[]
+export type FriendType = {
+    id: string
+    name: string
 }
 
-type DialogPageType = {
+export type ProfilePageType = {
+    posts: PostType[]
+}
+
+export type DialogPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
 }
 
-type SideBarType = {
-
+export type SideBarType = {
+    friends: FriendType[]
 }
 
 type RootStateType = {
@@ -35,7 +38,7 @@ type RootStateType = {
     sidebar: SideBarType
 }
 
-const state: RootStateType = {
+export const state: RootStateType = {
     dialogsPage: {
         dialogs: [
             {id: '1', name: 'Ivan'},
@@ -60,5 +63,11 @@ const state: RootStateType = {
             {id: '2', text: 'It\'s my first message!', likesCount: 15},
         ]
     },
-    sidebar: {}
+    sidebar: {
+        friends: [
+            {id: '1', name: 'Ivan'},
+            {id: '3', name: 'Katya'},
+            {id: '5', name: 'Emery'},
+        ]
+    }
 }
