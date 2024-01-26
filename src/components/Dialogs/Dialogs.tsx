@@ -1,8 +1,8 @@
-import React, {FC} from "react";
+import React, {FC, useRef} from "react";
 import styles from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
-import {DialogType, MessageType} from "../../redux/state";
+import {DialogType, MessageType} from "../../types";
 
 type DialogsPropsType = {
     dialogs: DialogType[]
@@ -10,6 +10,14 @@ type DialogsPropsType = {
 }
 
 const Dialogs:FC<DialogsPropsType> = ({dialogs, messages}) => {
+    const addMessage = () => {
+        const text = inputRef.current?.value
+        alert(text)
+    }
+
+    const inputRef = useRef<HTMLTextAreaElement>(null);
+
+
     return (
         <div className={styles.wrapper}>
             <h1>Dialogs</h1>
@@ -27,6 +35,10 @@ const Dialogs:FC<DialogsPropsType> = ({dialogs, messages}) => {
                            return <MessageItem key={message.id} text={message.text} />
                         })
                     }
+                </div>
+                <textarea ref={inputRef}></textarea>
+                <div>
+                    <button onClick={addMessage}>Add Post</button>
                 </div>
             </div>
         </div>

@@ -1,42 +1,5 @@
-export type PostType = {
-    id: string
-    text: string
-    likesCount: number
-}
-
-export type DialogType = {
-    id: string
-    name: string
-}
-
-export type MessageType = {
-    id: string
-    text: string
-}
-
-export type FriendType = {
-    id: string
-    name: string
-}
-
-export type ProfilePageType = {
-    posts: PostType[]
-}
-
-export type DialogPageType = {
-    dialogs: DialogType[]
-    messages: MessageType[]
-}
-
-export type SideBarType = {
-    friends: FriendType[]
-}
-
-type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogPageType
-    sidebar: SideBarType
-}
+import {PostType, RootStateType} from "../types";
+import {reRenderEntireTree} from "../render";
 
 export const state: RootStateType = {
     dialogsPage: {
@@ -70,4 +33,14 @@ export const state: RootStateType = {
             {id: '5', name: 'Emery'},
         ]
     }
+}
+
+export const addPost = (postMessage:  string) => {
+    const newPost: PostType = {
+        id: '5',
+        text: postMessage,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost)
+    reRenderEntireTree(state)
 }

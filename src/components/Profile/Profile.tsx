@@ -1,19 +1,20 @@
 import React, {FC} from "react";
-import {Posts} from "../Posts/Posts";
 import {ProfileInfo} from "../ProfileInfo/ProfileInfo";
-import {PostType} from "../../redux/state";
+import {MyPosts} from "../MyPosts/MyPosts";
+import {PostType} from "../../types";
 
 type ProfilePropsType = {
     posts: PostType[]
+    addPost: (text: string) => void
 }
 
-const Profile: FC<ProfilePropsType> = ({posts}) => {
-   return (
-       <div>
-           <ProfileInfo />
-           <Posts posts={posts}/>
-       </div>
-   )
+const Profile: FC<ProfilePropsType> = ({posts, addPost}) => {
+    return (
+        <div>
+            <ProfileInfo/>
+            <MyPosts posts={posts} addPost={addPost} />
+        </div>
+    )
 }
 
 export default Profile

@@ -6,16 +6,17 @@ import Footer from "./components/Footer/Footer";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {DialogType, FriendType, MessageType, PostType} from "./redux/state";
+import {DialogType, FriendType, MessageType, PostType} from "./types";
 
 type AppPropsType = {
     posts: PostType[]
     dialogs: DialogType[]
     messages: MessageType[]
     friends: FriendType[]
+    addPost: (text: string) => void
 }
 
-const App = ({posts, dialogs, messages, friends}: AppPropsType) => {
+const App = ({posts, dialogs, messages, friends, addPost}: AppPropsType) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -23,7 +24,7 @@ const App = ({posts, dialogs, messages, friends}: AppPropsType) => {
                 <Navbar friends={friends} />
                 <div className='app-wrapper-content'>
                     <Route path={'/dialogs'} render={() => <Dialogs dialogs={dialogs} messages={messages}/>}/>
-                    <Route path={'/profile'} render={() => <Profile posts={posts}/>}/>
+                    <Route path={'/profile'} render={() => <Profile posts={posts} addPost={addPost}/>}/>
                 </div>
                 <Footer/>
             </div>
