@@ -6,25 +6,25 @@ import Footer from "./components/Footer/Footer";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {DialogType, FriendType, MessageType, PostType} from "./types";
+import {RootStateType} from "./types";
 
 type AppPropsType = {
-    posts: PostType[]
-    dialogs: DialogType[]
-    messages: MessageType[]
-    friends: FriendType[]
-    addPost: (text: string) => void
+    state: RootStateType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
-const App = ({posts, dialogs, messages, friends, addPost}: AppPropsType) => {
+const App = ({state, addPost, updateNewPostText}: AppPropsType) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar friends={friends} />
+                <Navbar friends={state.sidebar.friends}/>
                 <div className='app-wrapper-content'>
-                    <Route path={'/dialogs'} render={() => <Dialogs dialogs={dialogs} messages={messages}/>}/>
-                    <Route path={'/profile'} render={() => <Profile posts={posts} addPost={addPost}/>}/>
+                    <Route path={'/dialogs'} render={() => <Dialogs dialogsPage={state.dialogsPage}/>}/>
+                    <Route path={'/profile'} render={() => <Profile profilePage={state.profilePage}
+                                                                    addPost={addPost}
+                                                                    updateNewPostText={updateNewPostText}/>}/>
                 </div>
                 <Footer/>
             </div>

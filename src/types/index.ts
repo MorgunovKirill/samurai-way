@@ -20,7 +20,8 @@ export type FriendType = {
 }
 
 export type ProfilePageType = {
-    posts: PostType[]
+    posts: PostType[],
+    newPostText: string
 }
 
 export type DialogPageType = {

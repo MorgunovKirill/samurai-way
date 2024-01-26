@@ -1,20 +1,21 @@
-import React, {FC, useRef} from "react";
+import React, {ChangeEvent, FC, useRef} from "react";
 import {Post} from "../Post/Post";
 import styles from "./MyPosts.module.css";
-import {PostType} from "../../types";
+import {ProfilePageType} from "../../types";
 
 type PostsPropsType = {
-    posts: PostType[]
-    addPost: (text: string) => void
+    profilePage: ProfilePageType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
-export const MyPosts:FC<PostsPropsType> = ({posts, addPost}) => {
+export const MyPosts: FC<PostsPropsType> = ({profilePage, addPost, updateNewPostText}) => {
     const addPostHandler = () => {
-        const text = inputRef.current?.value
-        if (text) {
-            addPost(text)
-            inputRef.current.value = ''
-        }
+        addPost()
+    }
+
+    const onPostChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+        updateNewPostText(evt.currentTarget.value)
     }
 
     const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -24,7 +25,7 @@ export const MyPosts:FC<PostsPropsType> = ({posts, addPost}) => {
             <div>
                 My posts
                 <div>
-                    <textarea ref={inputRef}></textarea>
+                    <textarea onChange={onPostChange} ref={inputRef} value={profilePage.newPostText}></textarea>
                 </div>
                 <div>
                     <button onClick={addPostHandler}>Add Post</button>
@@ -32,8 +33,8 @@ export const MyPosts:FC<PostsPropsType> = ({posts, addPost}) => {
             </div>
             <div>
                 {
-                    posts.map(post => {
-                        return <Post key={post.id} message={post.text}  likesCount={post.likesCount} />
+                    profilePage.posts.map(post => {
+                        return <Post key={post.id} message={post.text} likesCount={post.likesCount}/>
                     })
                 }
             </div>

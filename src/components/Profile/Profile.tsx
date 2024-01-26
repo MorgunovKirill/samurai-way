@@ -1,18 +1,19 @@
 import React, {FC} from "react";
 import {ProfileInfo} from "../ProfileInfo/ProfileInfo";
 import {MyPosts} from "../MyPosts/MyPosts";
-import {PostType} from "../../types";
+import {ProfilePageType} from "../../types";
 
 type ProfilePropsType = {
-    posts: PostType[]
-    addPost: (text: string) => void
+    profilePage: ProfilePageType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
-const Profile: FC<ProfilePropsType> = ({posts, addPost}) => {
+const Profile: FC<ProfilePropsType> = ({profilePage, addPost, updateNewPostText}) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={posts} addPost={addPost} />
+            <MyPosts profilePage={profilePage} addPost={addPost} updateNewPostText={updateNewPostText} />
         </div>
     )
 }

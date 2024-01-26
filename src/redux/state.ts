@@ -24,7 +24,8 @@ export const state: RootStateType = {
         posts: [
             {id: '1', text: 'Hello world!', likesCount: 3},
             {id: '2', text: 'It\'s my first message!', likesCount: 15},
-        ]
+        ],
+        newPostText: 'asds'
     },
     sidebar: {
         friends: [
@@ -35,12 +36,18 @@ export const state: RootStateType = {
     }
 }
 
-export const addPost = (postMessage:  string) => {
+export const addPost = () => {
     const newPost: PostType = {
         id: '5',
-        text: postMessage,
+        text: state.profilePage.newPostText,
         likesCount: 0
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
+    reRenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText:  string) => {
+    state.profilePage.newPostText = newText
     reRenderEntireTree(state)
 }
