@@ -1,5 +1,8 @@
 import {PostType, RootStateType} from "../types";
-import {reRenderEntireTree} from "../render";
+
+let reRenderEntireTree = (state: RootStateType) => {
+
+}
 
 export const state: RootStateType = {
     dialogsPage: {
@@ -50,4 +53,8 @@ export const addPost = () => {
 export const updateNewPostText = (newText:  string) => {
     state.profilePage.newPostText = newText
     reRenderEntireTree(state)
+}
+
+export const subscribe = (observer: (state: RootStateType) => void) => {
+    reRenderEntireTree = observer
 }
