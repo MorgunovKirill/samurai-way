@@ -33,6 +33,15 @@ export type SideBarType = {
     friends: FriendType[]
 }
 
+export type StoreType = {
+    _state: RootStateType
+    getState: () => RootStateType
+    addPost: () => void
+    updateNewPostText: (newText:  string) => void
+    _onChange: () => void
+    subscribe: (callback: () => void) => void
+}
+
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType

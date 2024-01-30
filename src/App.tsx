@@ -6,15 +6,15 @@ import Footer from "./components/Footer/Footer";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {RootStateType} from "./types";
+import {StoreType} from "./types";
 
 type AppPropsType = {
-    state: RootStateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    store: StoreType
 }
 
-const App = ({state, addPost, updateNewPostText}: AppPropsType) => {
+const App = ({store}: AppPropsType) => {
+    const state = store.getState();
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -23,8 +23,8 @@ const App = ({state, addPost, updateNewPostText}: AppPropsType) => {
                 <div className='app-wrapper-content'>
                     <Route path={'/dialogs'} render={() => <Dialogs dialogsPage={state.dialogsPage}/>}/>
                     <Route path={'/profile'} render={() => <Profile profilePage={state.profilePage}
-                                                                    addPost={addPost}
-                                                                    updateNewPostText={updateNewPostText}/>}/>
+                                                                    addPost={store.addPost.bind(store)}
+                                                                    updateNewPostText={store.updateNewPostText.bind(store)}/>}/>
                 </div>
                 <Footer/>
             </div>
