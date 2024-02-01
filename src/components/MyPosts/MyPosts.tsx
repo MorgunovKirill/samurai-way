@@ -2,6 +2,7 @@ import React, {ChangeEvent, FC, useRef} from "react";
 import {Post} from "../Post/Post";
 import styles from "./MyPosts.module.css";
 import {ProfilePageType} from "../../types";
+import {addPostActionCreator, updateNewPostActionCreator} from "../../redux/store";
 
 type PostsPropsType = {
     profilePage: ProfilePageType
@@ -10,11 +11,11 @@ type PostsPropsType = {
 
 export const MyPosts: FC<PostsPropsType> = ({profilePage, dispatch}) => {
     const addPostHandler = () => {
-        dispatch({type: 'ADD-POST'})
+        dispatch(addPostActionCreator())
     }
 
     const onPostChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch({type: 'UPDATE-NEW-POST', newText: evt.currentTarget.value})
+        dispatch(updateNewPostActionCreator(evt.currentTarget.value))
     }
 
     const inputRef = useRef<HTMLTextAreaElement>(null);

@@ -1,5 +1,16 @@
 import {StoreType} from "../types";
 
+const ADD_POST_ACTION = 'ADD-POST';
+const UPDATE_NEW_POST_ACTION = 'UPDATE-NEW-POST';
+
+export const addPostActionCreator = () => {
+    return {type: ADD_POST_ACTION}
+}
+
+export const updateNewPostActionCreator = (newText: string) => {
+    return {type: UPDATE_NEW_POST_ACTION, newText}
+}
+
 export const store: StoreType = {
     _state: {
         dialogsPage: {
@@ -47,7 +58,7 @@ export const store: StoreType = {
 
     dispatch(action: any) {
         switch (action.type) {
-            case 'ADD-POST':
+            case ADD_POST_ACTION:
                 const newPost = {
                     id: '5',
                     text: this._state.profilePage.newPostText,
@@ -57,7 +68,7 @@ export const store: StoreType = {
                 this._state.profilePage.newPostText = ''
                 this._callSubscriber()
                 break;
-            case 'UPDATE-NEW-POST':
+            case UPDATE_NEW_POST_ACTION:
                 this._state.profilePage.newPostText = action.newText
                 this._callSubscriber()
                 break;
