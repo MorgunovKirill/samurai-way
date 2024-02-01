@@ -5,17 +5,16 @@ import {ProfilePageType} from "../../types";
 
 type PostsPropsType = {
     profilePage: ProfilePageType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
-export const MyPosts: FC<PostsPropsType> = ({profilePage, addPost, updateNewPostText}) => {
+export const MyPosts: FC<PostsPropsType> = ({profilePage, dispatch}) => {
     const addPostHandler = () => {
-        addPost()
+        dispatch({type: 'ADD-POST'})
     }
 
     const onPostChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-        updateNewPostText(evt.currentTarget.value)
+        dispatch({type: 'UPDATE-NEW-POST', newText: evt.currentTarget.value})
     }
 
     const inputRef = useRef<HTMLTextAreaElement>(null);

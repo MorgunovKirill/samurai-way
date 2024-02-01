@@ -6,14 +6,14 @@ import Footer from "./components/Footer/Footer";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {StoreType} from "./types";
+import {RootStateType} from "./types";
 
 type AppPropsType = {
-    store: StoreType
+    state: RootStateType
+    dispatch: (action: any) => void
 }
 
-const App = ({store}: AppPropsType) => {
-    const state = store.getState();
+const App = ({state, dispatch}: AppPropsType) => {
 
     return (
         <BrowserRouter>
@@ -22,9 +22,7 @@ const App = ({store}: AppPropsType) => {
                 <Navbar friends={state.sidebar.friends}/>
                 <div className='app-wrapper-content'>
                     <Route path={'/dialogs'} render={() => <Dialogs dialogsPage={state.dialogsPage}/>}/>
-                    <Route path={'/profile'} render={() => <Profile profilePage={state.profilePage}
-                                                                    addPost={store.addPost.bind(store)}
-                                                                    updateNewPostText={store.updateNewPostText.bind(store)}/>}/>
+                    <Route path={'/profile'} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
                 </div>
                 <Footer/>
             </div>

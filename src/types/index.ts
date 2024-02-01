@@ -36,10 +36,9 @@ export type SideBarType = {
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
-    addPost: () => void
-    updateNewPostText: (newText:  string) => void
-    _onChange: () => void
+    _callSubscriber: () => void
     subscribe: (callback: () => void) => void
+    dispatch: (action: any) => void
 }
 
 export type RootStateType = {

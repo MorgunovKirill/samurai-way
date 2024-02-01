@@ -35,27 +35,32 @@ export const store: StoreType = {
             ]
         }
     },
-    _onChange() {
+    _callSubscriber() {
         console.log('State changed')
     },
     getState() {
         return this._state;
     },
-    addPost() {
-        const newPost = {
-            id: '5',
-            text: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._onChange()
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._onChange()
-    },
     subscribe(observer) {
-        this._onChange = observer;
+        this._callSubscriber = observer;
+    },
+
+    dispatch(action: any) {
+        switch (action.type) {
+            case 'ADD-POST':
+                const newPost = {
+                    id: '5',
+                    text: this._state.profilePage.newPostText,
+                    likesCount: 0
+                }
+                this._state.profilePage.posts.push(newPost)
+                this._state.profilePage.newPostText = ''
+                this._callSubscriber()
+                break;
+            case 'UPDATE-NEW-POST':
+                this._state.profilePage.newPostText = action.newText
+                this._callSubscriber()
+                break;
+        }
     }
 }

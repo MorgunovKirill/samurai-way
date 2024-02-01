@@ -4,9 +4,12 @@ import App from "./App";
 import React from "react";
 
 const reRenderEntireTree = () => {
+    const state = store.getState();
+
     ReactDOM.render(
         <App
-            store={store}
+            state={state}
+            dispatch={store.dispatch.bind(store)}
         />,
         document.getElementById('root')
     );

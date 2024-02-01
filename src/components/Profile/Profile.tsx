@@ -5,15 +5,14 @@ import {ProfilePageType} from "../../types";
 
 type ProfilePropsType = {
     profilePage: ProfilePageType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
-const Profile: FC<ProfilePropsType> = ({profilePage, addPost, updateNewPostText}) => {
+const Profile: FC<ProfilePropsType> = ({profilePage, dispatch}) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts profilePage={profilePage} addPost={addPost} updateNewPostText={updateNewPostText} />
+            <MyPosts profilePage={profilePage} dispatch={dispatch} />
         </div>
     )
 }
