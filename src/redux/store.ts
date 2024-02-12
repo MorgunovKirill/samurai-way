@@ -1,4 +1,7 @@
 import {StoreType} from "../types";
+import profileReducer from "./profile-reducer";
+import sidebarReducer from "./sidebar-reducer";
+import dialogsReducer from "./dialogs-reducer";
 
 const ADD_POST_ACTION = 'ADD-POST';
 const UPDATE_NEW_POST_ACTION = 'UPDATE-NEW-POST';
@@ -75,34 +78,9 @@ export const store: StoreType = {
     },
 
     dispatch(action: UnionActionType) {
-        switch (action.type) {
-            case ADD_POST_ACTION:
-                const newPost = {
-                    id: '5',
-                    text: this._state.profilePage.newPostText,
-                    likesCount: 0
-                }
-                this._state.profilePage.posts.push(newPost)
-                this._state.profilePage.newPostText = ''
-                this._callSubscriber()
-                break;
-            case UPDATE_NEW_POST_ACTION:
-                this._state.profilePage.newPostText = action.newText
-                this._callSubscriber()
-                break;
-            case ADD_NEW_MESSAGE_ACTION:
-                const newMessage = {
-                    id: '6',
-                    text: this._state.dialogsPage.newMessageText,
-                }
-                this._state.dialogsPage.messages.push(newMessage)
-                this._state.dialogsPage.newMessageText = ''
-                this._callSubscriber()
-                break;
-            case UPDATE_NEW_MESSAGE_ACTION:
-                this._state.dialogsPage.newMessageText = action.newText
-                this._callSubscriber()
-                break;
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._callSubscriber()
     }
 }
