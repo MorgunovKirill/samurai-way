@@ -3,11 +3,11 @@ import styles from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
 import {DialogPageType} from "../../types";
-import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/store";
+import {addMessageActionCreator, UnionActionType, updateNewMessageActionCreator} from "../../redux/store";
 
 type DialogsPropsType = {
     dialogsPage: DialogPageType
-    dispatch: (action: any) => void
+    dispatch: (action: UnionActionType) => void
 }
 
 const Dialogs:FC<DialogsPropsType> = ({dialogsPage, dispatch}) => {

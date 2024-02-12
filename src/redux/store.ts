@@ -6,20 +6,27 @@ const ADD_NEW_MESSAGE_ACTION = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_ACTION = 'UPDATE-NEW-MESSAGE';
 
 export const addPostActionCreator = () => {
-    return {type: ADD_POST_ACTION}
+    return {type: ADD_POST_ACTION} as const
 }
 
 export const updateNewPostActionCreator = (newText: string) => {
-    return {type: UPDATE_NEW_POST_ACTION, newText}
+    return {type: UPDATE_NEW_POST_ACTION, newText} as const
 }
 
 export const addMessageActionCreator = () => {
-    return {type: ADD_NEW_MESSAGE_ACTION}
+    return {type: ADD_NEW_MESSAGE_ACTION} as const
 }
 
 export const updateNewMessageActionCreator = (newText: string) => {
-    return {type: UPDATE_NEW_MESSAGE_ACTION, newText}
+    return {type: UPDATE_NEW_MESSAGE_ACTION, newText} as const
 }
+
+type AddPostActionCreatorType = ReturnType<typeof addPostActionCreator>
+type UpdateNewPostActionCreatorType = ReturnType<typeof updateNewPostActionCreator>
+type AddMessageActionCreatorType = ReturnType<typeof addMessageActionCreator>
+type UpdateNewMessageActionCreatorType = ReturnType<typeof updateNewMessageActionCreator>
+
+export type UnionActionType =  AddPostActionCreatorType | UpdateNewPostActionCreatorType | AddMessageActionCreatorType | UpdateNewMessageActionCreatorType;
 
 export const store: StoreType = {
     _state: {
@@ -67,7 +74,7 @@ export const store: StoreType = {
         this._callSubscriber = observer;
     },
 
-    dispatch(action: any) {
+    dispatch(action: UnionActionType) {
         switch (action.type) {
             case ADD_POST_ACTION:
                 const newPost = {

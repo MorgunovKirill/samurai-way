@@ -1,3 +1,5 @@
+import {UnionActionType} from "../redux/store";
+
 export type PostType = {
     id: string
     text: string
@@ -39,7 +41,7 @@ export type StoreType = {
     getState: () => RootStateType
     _callSubscriber: () => void
     subscribe: (callback: () => void) => void
-    dispatch: (action: any) => void
+    dispatch: (action: UnionActionType) => void
 }
 
 export type RootStateType = {

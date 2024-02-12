@@ -7,10 +7,11 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {RootStateType} from "./types";
+import {UnionActionType} from "./redux/store";
 
 type AppPropsType = {
     state: RootStateType
-    dispatch: (action: any) => void
+    dispatch: (action: UnionActionType) => void
 }
 
 const App = ({state, dispatch}: AppPropsType) => {
