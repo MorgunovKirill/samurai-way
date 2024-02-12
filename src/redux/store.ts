@@ -2,6 +2,8 @@ import {StoreType} from "../types";
 
 const ADD_POST_ACTION = 'ADD-POST';
 const UPDATE_NEW_POST_ACTION = 'UPDATE-NEW-POST';
+const ADD_NEW_MESSAGE_ACTION = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_ACTION = 'UPDATE-NEW-MESSAGE';
 
 export const addPostActionCreator = () => {
     return {type: ADD_POST_ACTION}
@@ -9,6 +11,14 @@ export const addPostActionCreator = () => {
 
 export const updateNewPostActionCreator = (newText: string) => {
     return {type: UPDATE_NEW_POST_ACTION, newText}
+}
+
+export const addMessageActionCreator = () => {
+    return {type: ADD_NEW_MESSAGE_ACTION}
+}
+
+export const updateNewMessageActionCreator = (newText: string) => {
+    return {type: UPDATE_NEW_MESSAGE_ACTION, newText}
 }
 
 export const store: StoreType = {
@@ -29,7 +39,8 @@ export const store: StoreType = {
                 {id: '4', text: 'Yo'},
                 {id: '5', text: 'YoYo'},
                 {id: '6', text: 'YoYo asdasd'},
-            ]
+            ],
+            newMessageText: ''
         },
         profilePage: {
             posts: [
@@ -70,6 +81,19 @@ export const store: StoreType = {
                 break;
             case UPDATE_NEW_POST_ACTION:
                 this._state.profilePage.newPostText = action.newText
+                this._callSubscriber()
+                break;
+            case ADD_NEW_MESSAGE_ACTION:
+                const newMessage = {
+                    id: '6',
+                    text: this._state.dialogsPage.newMessageText,
+                }
+                this._state.dialogsPage.messages.push(newMessage)
+                this._state.dialogsPage.newMessageText = ''
+                this._callSubscriber()
+                break;
+            case UPDATE_NEW_MESSAGE_ACTION:
+                this._state.dialogsPage.newMessageText = action.newText
                 this._callSubscriber()
                 break;
         }

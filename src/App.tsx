@@ -21,7 +21,7 @@ const App = ({state, dispatch}: AppPropsType) => {
                 <Header/>
                 <Navbar friends={state.sidebar.friends}/>
                 <div className='app-wrapper-content'>
-                    <Route path={'/dialogs'} render={() => <Dialogs dialogsPage={state.dialogsPage}/>}/>
+                    <Route path={'/dialogs'} render={() => <Dialogs dialogsPage={state.dialogsPage} dispatch={dispatch}/>}/>
                     <Route path={'/profile'} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
                 </div>
                 <Footer/>

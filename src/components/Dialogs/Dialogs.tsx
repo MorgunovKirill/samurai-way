@@ -1,21 +1,25 @@
-import React, {FC, useRef} from "react";
+import React, {ChangeEvent, FC, useRef} from "react";
 import styles from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
 import {DialogPageType} from "../../types";
+import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/store";
 
 type DialogsPropsType = {
     dialogsPage: DialogPageType
+    dispatch: (action: any) => void
 }
 
-const Dialogs:FC<DialogsPropsType> = ({dialogsPage}) => {
-    const addMessage = () => {
-        const text = inputRef.current?.value
-        alert(text)
+const Dialogs:FC<DialogsPropsType> = ({dialogsPage, dispatch}) => {
+    const newMessageChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+        dispatch(updateNewMessageActionCreator(evt.currentTarget.value))
     }
 
-    const inputRef = useRef<HTMLTextAreaElement>(null);
-
+    const addMessage = () => {
+        if(dialogsPage.newMessageText) {
+            dispatch(addMessageActionCreator())
+        }
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -35,9 +39,9 @@ const Dialogs:FC<DialogsPropsType> = ({dialogsPage}) => {
                         })
                     }
                 </div>
-                <textarea ref={inputRef}></textarea>
+                <textarea value={dialogsPage.newMessageText} onChange={newMessageChangeHandler}></textarea>
                 <div>
-                    <button onClick={addMessage}>Add Post</button>
+                    <button type='button' onClick={addMessage}>Add Post</button>
                 </div>
             </div>
         </div>

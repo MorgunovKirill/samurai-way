@@ -27,6 +27,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
+    newMessageText: string
 }
 
 export type SideBarType = {
