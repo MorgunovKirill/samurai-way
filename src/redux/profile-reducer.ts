@@ -4,7 +4,15 @@ import {ProfilePageType} from "../types";
 const ADD_POST_ACTION = 'ADD-POST';
 const UPDATE_NEW_POST_ACTION = 'UPDATE-NEW-POST';
 
-const profileReducer = (state: ProfilePageType, action: UnionActionType) => {
+const initialState: ProfilePageType =  {
+    posts: [
+        {id: '1', text: 'Hello world!', likesCount: 3},
+        {id: '2', text: 'It\'s my first message!', likesCount: 15},
+    ],
+        newPostText: ''
+};
+
+const profileReducer = (state: ProfilePageType = initialState, action: UnionActionType) => {
     switch (action.type) {
         case ADD_POST_ACTION:
             const newPost = {

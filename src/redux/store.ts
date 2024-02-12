@@ -33,6 +33,13 @@ export type UnionActionType =  AddPostActionCreatorType | UpdateNewPostActionCre
 
 export const store: StoreType = {
     _state: {
+        profilePage: {
+            posts: [
+                {id: '1', text: 'Hello world!', likesCount: 3},
+                {id: '2', text: 'It\'s my first message!', likesCount: 15},
+            ],
+            newPostText: ''
+        },
         dialogsPage: {
             dialogs: [
                 {id: '1', name: 'Ivan'},
@@ -51,13 +58,6 @@ export const store: StoreType = {
                 {id: '6', text: 'YoYo asdasd'},
             ],
             newMessageText: ''
-        },
-        profilePage: {
-            posts: [
-                {id: '1', text: 'Hello world!', likesCount: 3},
-                {id: '2', text: 'It\'s my first message!', likesCount: 15},
-            ],
-            newPostText: ''
         },
         sidebar: {
             friends: [
