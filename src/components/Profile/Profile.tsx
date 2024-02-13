@@ -1,19 +1,13 @@
-import React, {FC} from "react";
+import React from "react";
 import {ProfileInfo} from "../ProfileInfo/ProfileInfo";
-import {MyPosts} from "../MyPosts/MyPosts";
-import {ProfilePageType} from "../../types";
-import {UnionActionType} from "../../redux/store";
+import MyPostsContainer from "../MyPosts/MyPostsContainer";
 
-type ProfilePropsType = {
-    profilePage: ProfilePageType
-    dispatch: (action: UnionActionType) => void
-}
 
-const Profile: FC<ProfilePropsType> = ({profilePage, dispatch}) => {
+const Profile = () => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts profilePage={profilePage} dispatch={dispatch} />
+            <MyPostsContainer />
         </div>
     )
 }

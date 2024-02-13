@@ -1,31 +1,25 @@
 import React, {ChangeEvent, FC, useRef} from "react";
 import {Post} from "../Post/Post";
 import styles from "./MyPosts.module.css";
-import {ProfilePageType} from "../../types";
-import {addPostActionCreator, UnionActionType, updateNewPostActionCreator} from "../../redux/store";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
-type PostsPropsType = {
-    profilePage: ProfilePageType
-    dispatch: (action: UnionActionType) => void
-}
-
-export const MyPosts: FC<PostsPropsType> = ({profilePage, dispatch}) => {
-    const addPostHandler = () => {
-        dispatch(addPostActionCreator())
-    }
-
+export const MyPosts: FC<MyPostsPropsType> = ({profilePage, addPost, updateNewPostText}) => {
     const onPostChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(updateNewPostActionCreator(evt.currentTarget.value))
+        updateNewPostText(evt.currentTarget.value)
     }
 
-    const inputRef = useRef<HTMLTextAreaElement>(null);
+    const addPostHandler = () => {
+        if (profilePage.newPostText) {
+            addPost();
+        }
+    }
 
     return (
         <div className={styles.posts}>
             <div>
                 My posts
                 <div>
-                    <textarea onChange={onPostChange} ref={inputRef} value={profilePage.newPostText}></textarea>
+                    <textarea onChange={onPostChange} value={profilePage.newPostText}></textarea>
                 </div>
                 <div>
                     <button onClick={addPostHandler}>Add Post</button>

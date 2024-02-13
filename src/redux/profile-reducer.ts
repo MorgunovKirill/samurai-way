@@ -12,7 +12,7 @@ const initialState: ProfilePageType =  {
         newPostText: ''
 };
 
-const profileReducer = (state: ProfilePageType = initialState, action: UnionActionType) => {
+const profileReducer = (state: ProfilePageType = initialState, action: UnionActionType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST_ACTION:
             const newPost = {
@@ -20,12 +20,9 @@ const profileReducer = (state: ProfilePageType = initialState, action: UnionActi
                 text: state.newPostText,
                 likesCount: 0
             }
-            state.posts.push(newPost)
-            state.newPostText = ''
-            return state;
+            return {...state, posts: [newPost, ...state.posts], newPostText: ''};
         case UPDATE_NEW_POST_ACTION:
-            state.newPostText = action.newText
-            return state;
+            return {...state, newPostText: action.newText};
         default:
             return state;
     }

@@ -1,33 +1,24 @@
 import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
-import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
-import {RootStateType} from "./types";
-import {UnionActionType} from "./redux/store";
+import {Route} from "react-router-dom";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
 
-type AppPropsType = {
-    state: RootStateType
-    dispatch: (action: UnionActionType) => void
-}
 
-const App = ({state, dispatch}: AppPropsType) => {
-
+const App = () => {
     return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <Header/>
-                <Navbar friends={state.sidebar.friends}/>
-                <div className='app-wrapper-content'>
-                    <Route path={'/dialogs'} render={() => <Dialogs dialogsPage={state.dialogsPage} dispatch={dispatch}/>}/>
-                    <Route path={'/profile'} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
-                </div>
-                <Footer/>
+        <div className="app-wrapper">
+            <Header/>
+            <NavbarContainer />
+            <div className='app-wrapper-content'>
+                <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
+                <Route path={'/profile'} render={() => <Profile />}/>
             </div>
-        </BrowserRouter>
+            <Footer/>
+        </div>
     );
 }
 

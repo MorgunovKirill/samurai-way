@@ -1,13 +1,9 @@
 import React, {FC} from "react";
 import styles from "./Navbar.module.css"
 import {NavLink} from "react-router-dom";
-import {FriendType} from "../../types";
+import {NavbarPropsType} from "./NavbarContainer";
 
-type NavbarPropsType = {
-    friends: FriendType[]
-}
-
-const Navbar: FC<NavbarPropsType> = ({friends}) => {
+const Navbar: FC<NavbarPropsType> = (props) => {
     return (
         <div className={styles.nav}>
             <nav >
@@ -31,7 +27,7 @@ const Navbar: FC<NavbarPropsType> = ({friends}) => {
                 <h2>Friends</h2>
                 <ul>
                     {
-                        friends.map(friend => <li className={styles.friend} key={friend.id}>
+                        props.sidebar.friends.map(friend => <li className={styles.friend} key={friend.id}>
                             {friend.name}
                         </li>)
                     }

@@ -2,23 +2,16 @@ import React, {ChangeEvent, FC, useRef} from "react";
 import styles from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
-import {DialogPageType} from "../../types";
-import {addMessageActionCreator, UnionActionType, updateNewMessageActionCreator} from "../../redux/store";
+import {DialogsPropsType} from "./DialogsContainer";
 
-type DialogsPropsType = {
-    dialogsPage: DialogPageType
-    dispatch: (action: UnionActionType) => void
-}
-
-const Dialogs:FC<DialogsPropsType> = ({dialogsPage, dispatch}) => {
-    const newMessageChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(updateNewMessageActionCreator(evt.currentTarget.value))
-    }
-
-    const addMessage = () => {
-        if(dialogsPage.newMessageText) {
-            dispatch(addMessageActionCreator())
+const Dialogs:FC<DialogsPropsType> = ({dialogsPage, updateNewMessageText, addMessage}) => {
+    const addMessageHandler = () => {
+        if (dialogsPage.newMessageText) {
+            addMessage();
         }
+    }
+    const newMessageChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+        updateNewMessageText(evt.currentTarget.value)
     }
 
     return (
@@ -41,7 +34,7 @@ const Dialogs:FC<DialogsPropsType> = ({dialogsPage, dispatch}) => {
                 </div>
                 <textarea value={dialogsPage.newMessageText} onChange={newMessageChangeHandler}></textarea>
                 <div>
-                    <button type='button' onClick={addMessage}>Add Post</button>
+                    <button type='button' onClick={addMessageHandler}>Add Post</button>
                 </div>
             </div>
         </div>
