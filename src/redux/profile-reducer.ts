@@ -1,8 +1,19 @@
-import {UnionActionType} from "./store";
 import {ProfilePageType} from "../types";
+import {UnionActionType} from "./store";
 
 const ADD_POST_ACTION = 'ADD-POST';
 const UPDATE_NEW_POST_ACTION = 'UPDATE-NEW-POST';
+
+export type AddPostActionCreatorType = ReturnType<typeof addPostActionCreator>
+export type UpdateNewPostActionCreatorType = ReturnType<typeof updateNewPostActionCreator>
+
+export const addPostActionCreator = () => {
+    return {type: ADD_POST_ACTION} as const
+}
+
+export const updateNewPostActionCreator = (newText: string) => {
+    return {type: UPDATE_NEW_POST_ACTION, newText} as const
+}
 
 const initialState: ProfilePageType =  {
     posts: [

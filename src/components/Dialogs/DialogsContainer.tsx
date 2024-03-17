@@ -1,12 +1,9 @@
 import {connect} from "react-redux";
-import {
-    addMessageActionCreator,
-    updateNewMessageActionCreator,
-} from "../../redux/store";
 import Dialogs from "./Dialogs";
 import {RootStateType} from "../../redux/redux-store";
 import {DialogPageType} from "../../types";
 import {Dispatch} from "redux";
+import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redux/dialogs-reducer";
 
 type MapStatePropsType = {
     dialogsPage: DialogPageType

@@ -32,6 +32,24 @@ export type DialogPageType = {
     newMessageText: string
 }
 
+export type LocationType = {
+    city: string,
+    country: string
+}
+
+export type UserType = {
+    id: number,
+    followed: boolean,
+    fullName: string,
+    photoUrl: string,
+    status: string,
+    location: LocationType
+}
+
+export type UsersPageType = {
+    users: UserType[]
+}
+
 export type SideBarType = {
     friends: FriendType[]
 }

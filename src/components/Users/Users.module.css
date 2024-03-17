@@ -1,0 +1,13 @@
+.userContainer {
+    display: flex;
+}
+.userActions {
+    display: flex;
+}
+.userInfo {
+    display: flex;
+}
+.userPhoto {
+    width: 208px;
+    height: 330px;
+}

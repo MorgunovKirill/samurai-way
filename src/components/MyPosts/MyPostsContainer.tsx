@@ -1,9 +1,9 @@
 import {connect} from "react-redux";
 import {MyPosts} from "./MyPosts";
-import {addPostActionCreator, updateNewPostActionCreator} from "../../redux/store";
 import {RootStateType} from "../../redux/redux-store";
 import {ProfilePageType} from "../../types";
 import {Dispatch} from "redux";
+import {addPostActionCreator, updateNewPostActionCreator} from "../../redux/profile-reducer";
 
 type MapStatePropsType = {
     profilePage: ProfilePageType
