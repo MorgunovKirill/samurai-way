@@ -20,7 +20,7 @@ export const Users: FC<UsersPropsType> = ({users, setUsers, follow}) => {
                             <img
                                 className={styles.userPhoto}
                                 src={u.photos.small !== null ? u.photos.small : UserPhoto}
-                                alt="user photo"
+                                alt=""
                             />
                         </div>
                         <div>

@@ -2,7 +2,7 @@ import {UserType} from "../../types";
 import {RootStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
-import {Users} from "./Users";
+import {Users} from "./UsersC";
 import {followAC, setUsersAC} from "../../redux/users-reducer";
 
 type MapStatePropsType = {
