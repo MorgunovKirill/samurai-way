@@ -1,33 +1,14 @@
 import {FC, useEffect} from "react";
 import {UsersPropsType} from "./UsersContainer";
 import styles from "./Users.module.css";
+import axios from "axios";
+import UserPhoto from '../../assets/images/avatar-default.jpg'
 
 export const Users: FC<UsersPropsType> = ({users, setUsers, follow}) => {
     useEffect(() => {
-        setUsers([
-            {
-                id: 1,
-                followed: false,
-                fullName: 'Dimych',
-                photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/44906d04-547a-45ef-a232-1b2e41d6b5df/220x330',
-                status: 'I am a boss',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: 2,
-                followed: true,
-                fullName: 'Ivan',
-                photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/44906d04-547a-45ef-a232-1b2e41d6b5df/220x330',
-                status: 'I am a boss too',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-            {
-                id: 3,
-                followed: true,
-                photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/44906d04-547a-45ef-a232-1b2e41d6b5df/220x330',
-                fullName: 'Nikolai', status: 'GO GO GO', location: {city: 'Kiev', country: 'Ukraine'}
-            },
-        ])
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((res) => {
+            setUsers(res.data.items)
+        })
     }, [])
 
     return <div className={styles.usersContainer}>
@@ -36,7 +17,11 @@ export const Users: FC<UsersPropsType> = ({users, setUsers, follow}) => {
                 return <div className={styles.userContainer} key={u.id}>
                     <div className={styles.userActions}>
                         <div>
-                            <img className={styles.userPhoto} src={u.photoUrl} alt="user photo"/>
+                            <img
+                                className={styles.userPhoto}
+                                src={u.photos.small !== null ? u.photos.small : UserPhoto}
+                                alt="user photo"
+                            />
                         </div>
                         <div>
                             {
@@ -51,15 +36,11 @@ export const Users: FC<UsersPropsType> = ({users, setUsers, follow}) => {
                     <div className={styles.userInfo}>
                         <div>
                             <div>
-                                {u.fullName}
+                                {u.name}
                             </div>
                             <div>
                                 {u.status}
                             </div>
-                        </div>
-                        <div>
-                            <div>{u.location.city}</div>
-                            <div>{u.location.country}</div>
                         </div>
                     </div>
                 </div>

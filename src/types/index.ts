@@ -32,18 +32,18 @@ export type DialogPageType = {
     newMessageText: string
 }
 
-export type LocationType = {
-    city: string,
-    country: string
+type PhotosType = {
+    small: null | string,
+    large: null | string,
 }
 
 export type UserType = {
     id: number,
     followed: boolean,
-    fullName: string,
+    name: string,
     photoUrl: string,
     status: string,
-    location: LocationType
+    photos: PhotosType,
 }
 
 export type UsersPageType = {
