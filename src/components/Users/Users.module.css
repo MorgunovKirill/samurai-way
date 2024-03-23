@@ -12,3 +12,9 @@
     height: 50px;
     object-fit: cover;
 }
+.selectedPage {
+    font-weight: 700;
+}
+.pageItem {
+    cursor: pointer;
+}

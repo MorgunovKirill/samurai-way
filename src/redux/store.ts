@@ -2,7 +2,12 @@ import {StoreType} from "../types";
 import profileReducer, {AddPostActionCreatorType, UpdateNewPostActionCreatorType} from "./profile-reducer";
 import dialogsReducer, {AddMessageActionCreatorType, UpdateNewMessageActionCreatorType} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import {FollowActionType, SetUsersActionType} from "./users-reducer";
+import {
+    FollowActionType,
+    setCurrentPageActionType,
+    setTotalUsersCountActionType,
+    SetUsersActionType
+} from "./users-reducer";
 
 export type UnionActionType =
     AddMessageActionCreatorType
@@ -10,7 +15,10 @@ export type UnionActionType =
     | AddPostActionCreatorType
     | UpdateNewPostActionCreatorType
     | FollowActionType
-    | SetUsersActionType;
+    | SetUsersActionType
+    | setTotalUsersCountActionType
+    | setCurrentPageActionType;
+
 
 export const store: StoreType = {
     _state: {
