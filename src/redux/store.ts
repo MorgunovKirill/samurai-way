@@ -6,7 +6,7 @@ import {
     FollowActionType,
     setCurrentPageActionType,
     setTotalUsersCountActionType,
-    SetUsersActionType
+    SetUsersActionType, toggleIsFetchingActionType
 } from "./users-reducer";
 
 export type UnionActionType =
@@ -17,7 +17,8 @@ export type UnionActionType =
     | FollowActionType
     | SetUsersActionType
     | setTotalUsersCountActionType
-    | setCurrentPageActionType;
+    | setCurrentPageActionType
+    | toggleIsFetchingActionType;
 
 
 export const store: StoreType = {
