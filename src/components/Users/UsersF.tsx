@@ -1,49 +1,17 @@
+import {FC, useEffect} from "react";
+import {UsersPropsType} from "./UsersContainer";
 import styles from "./Users.module.css";
-import UserPhoto from "../../assets/images/avatar-default.jpg";
-import React, {FC} from "react";
-import {UserType} from "../../types";
+import axios from "axios";
+import UserPhoto from '../../assets/images/avatar-default.jpg'
 
-type UsersPropsType = {
-    users: UserType[]
-    totalUsersCount: number,
-    pageSize: number,
-    currentPage: number,
-    onPageChanged: (pageNumber: number) => void
-    follow: (userId: number, followed: boolean) => void,
-}
-
-export const Users: FC<UsersPropsType> = ({
-                                              users,
-                                              totalUsersCount,
-                                              pageSize,
-                                              currentPage,
-                                              onPageChanged,
-                                              follow
-                                          }) => {
-
-    const pagesCount = Math.ceil(totalUsersCount / pageSize);
-    const pages = [];
-
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
+export const UsersF: FC<UsersPropsType> = ({users, setUsers, follow}) => {
+    useEffect(() => {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((res) => {
+            setUsers(res.data.items)
+        })
+    }, [])
 
     return <div className={styles.usersContainer}>
-        <div>
-            {
-                pages.map((p) => {
-                    return <span
-                        key={p}
-                        className={
-                            `${styles.pageItem} ${currentPage === p ? styles.selectedPage : ''}`
-                        }
-                        onClick={() => {
-                            onPageChanged(p)
-                        }}
-                    >{p}</span>
-                })
-            }
-        </div>
         {
             users.map((u) => {
                 return <div className={styles.userContainer} key={u.id}>
