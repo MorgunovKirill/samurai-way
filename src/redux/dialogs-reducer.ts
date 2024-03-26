@@ -4,16 +4,16 @@ import {UnionActionType} from "./store";
 const ADD_NEW_MESSAGE_ACTION = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_ACTION = 'UPDATE-NEW-MESSAGE';
 
-export const addMessageActionCreator = () => {
+export const addMessage = () => {
     return {type: ADD_NEW_MESSAGE_ACTION} as const
 }
 
-export const updateNewMessageActionCreator = (newText: string) => {
+export const updateNewMessage = (newText: string) => {
     return {type: UPDATE_NEW_MESSAGE_ACTION, newText} as const
 }
 
-export type AddMessageActionCreatorType = ReturnType<typeof addMessageActionCreator>
-export type UpdateNewMessageActionCreatorType = ReturnType<typeof updateNewMessageActionCreator>
+export type AddMessageActionCreatorType = ReturnType<typeof addMessage>
+export type UpdateNewMessageActionCreatorType = ReturnType<typeof updateNewMessage>
 
 const initialState: DialogPageType = {
     dialogs: [

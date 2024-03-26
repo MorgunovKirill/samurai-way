@@ -38,13 +38,13 @@ const usersReducer = (state: UsersPageType = initialState, action: UnionActionTy
     }
 }
 
-export type FollowActionType = ReturnType<typeof followAC>
-export type SetUsersActionType = ReturnType<typeof setUsersAC>
-export type setCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
-export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
-export type toggleIsFetchingActionType = ReturnType<typeof toggleIsFetchingAC>
+export type FollowActionType = ReturnType<typeof follow>
+export type SetUsersActionType = ReturnType<typeof setUsers>
+export type setCurrentPageActionType = ReturnType<typeof setCurrentPage>
+export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
+export type toggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
 
-export const followAC = (userId: number, followed: boolean) => {
+export const follow = (userId: number, followed: boolean) => {
     return {
         type: FOLLOW_ACTION,
         userId,
@@ -52,28 +52,28 @@ export const followAC = (userId: number, followed: boolean) => {
     } as const
 }
 
-export const setUsersAC = (users: UserType[]) => {
+export const setUsers = (users: UserType[]) => {
     return {
         type: SET_USERS_ACTION,
         users,
     } as const
 }
 
-export const setTotalUsersCountAC = (totalUsersCount: number) => {
+export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalUsersCount,
     } as const
 }
 
-export const setCurrentPageAC = (newCurrentPage: number) => {
+export const setCurrentPage = (newCurrentPage: number) => {
     return {
         type: SET_CURRENT_PAGE,
         newCurrentPage,
     } as const
 }
 
-export const toggleIsFetchingAC = (isFetching: boolean) => {
+export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching,

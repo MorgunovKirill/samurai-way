@@ -4,14 +4,14 @@ import DialogItem from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
 import {DialogsPropsType} from "./DialogsContainer";
 
-const Dialogs:FC<DialogsPropsType> = ({dialogsPage, updateNewMessageText, addMessage}) => {
+const Dialogs:FC<DialogsPropsType> = ({dialogsPage, updateNewMessage, addMessage}) => {
     const addMessageHandler = () => {
         if (dialogsPage.newMessageText) {
             addMessage();
         }
     }
     const newMessageChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-        updateNewMessageText(evt.currentTarget.value)
+        updateNewMessage(evt.currentTarget.value)
     }
 
     return (
