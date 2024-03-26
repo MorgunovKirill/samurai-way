@@ -1,12 +1,16 @@
-import React from "react";
+import React, {FC} from "react";
 import {ProfileInfo} from "../ProfileInfo/ProfileInfo";
 import MyPostsContainer from "../MyPosts/MyPostsContainer";
+import {ProfileType} from "../../types";
 
+type ProfilePagePropsType = {
+    profile: ProfileType
+}
 
-const Profile = () => {
+const Profile:FC<ProfilePagePropsType> = ({profile}) => {
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={profile}/>
             <MyPostsContainer />
         </div>
     )

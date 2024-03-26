@@ -1,5 +1,4 @@
-import {UnionActionType} from "./store";
-import {UsersPageType, UserType} from "../types";
+import {UnionActionType, UsersPageType, UserType} from "../types";
 
 const SET_USERS_ACTION = 'SET-USERS-ACTION'
 const FOLLOW_ACTION = 'FOLLOW-ACTION';

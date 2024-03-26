@@ -2,6 +2,7 @@ import styles from "./Users.module.css";
 import UserPhoto from "../../assets/images/avatar-default.jpg";
 import React, {FC} from "react";
 import {UserType} from "../../types";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     users: UserType[]
@@ -48,13 +49,13 @@ export const Users: FC<UsersPropsType> = ({
             users.map((u) => {
                 return <div className={styles.userContainer} key={u.id}>
                     <div className={styles.userActions}>
-                        <div>
+                        <NavLink to={`/profile/${u.id}`}>
                             <img
                                 className={styles.userPhoto}
                                 src={u.photos.small !== null ? u.photos.small : UserPhoto}
                                 alt=""
                             />
-                        </div>
+                        </NavLink>
                         <div>
                             {
                                 u.followed ? <button onClick={() => follow(u.id, false)} type='button'>

@@ -1,14 +1,28 @@
-import React from "react";
+import React, {FC} from "react";
 import styles from "./ProfileInfo.module.css";
+import {ProfileType} from "../../types";
 
-export const ProfileInfo = () => {
+
+type ProfileInfoPropsType = {
+    profile: ProfileType
+}
+
+export const ProfileInfo:FC<ProfileInfoPropsType> = ({profile}) => {
     return (
         <>
             <div className={styles.profileImg}>
-                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"/>
+                {profile.photos.large ?
+                    <img src={profile.photos.large}/>
+                    :
+                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"/>
+                }
             </div>
             <div className={styles.descriptionContainer}>
-                <img src="https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg" alt="avatar"/>
+                {profile.photos.small ?
+                    <img src={profile.photos.small}/>
+                    :
+                    <img src="https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg" alt="avatar"/>
+                }
                 <p className={styles.description}>
                     description
                 </p>

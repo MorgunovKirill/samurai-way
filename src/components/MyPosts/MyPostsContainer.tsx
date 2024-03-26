@@ -3,7 +3,7 @@ import {MyPosts} from "./MyPosts";
 import {RootStateType} from "../../redux/redux-store";
 import {ProfilePageType} from "../../types";
 import {Dispatch} from "redux";
-import {addPostActionCreator, updateNewPostActionCreator} from "../../redux/profile-reducer";
+import {addPost, updateNewPost} from "../../redux/profile-reducer";
 
 type MapStatePropsType = {
     profilePage: ProfilePageType
@@ -25,10 +25,10 @@ const mapStateToProps = (state: RootStateType): MapStatePropsType => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         updateNewPostText: (text: string) => {
-            dispatch(updateNewPostActionCreator(text))
+            dispatch(updateNewPost(text))
         },
         addPost: () => {
-            dispatch(addPostActionCreator())
+            dispatch(addPost())
         },
     }
 }

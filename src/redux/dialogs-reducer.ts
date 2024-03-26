@@ -1,5 +1,4 @@
-import {DialogPageType} from "../types";
-import {UnionActionType} from "./store";
+import {DialogPageType, UnionActionType} from "../types";
 
 const ADD_NEW_MESSAGE_ACTION = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_ACTION = 'UPDATE-NEW-MESSAGE';

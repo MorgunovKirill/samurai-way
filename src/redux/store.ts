@@ -1,24 +1,7 @@
-import {StoreType} from "../types";
-import profileReducer, {AddPostActionCreatorType, UpdateNewPostActionCreatorType} from "./profile-reducer";
-import dialogsReducer, {AddMessageActionCreatorType, UpdateNewMessageActionCreatorType} from "./dialogs-reducer";
+import {StoreType, UnionActionType} from "../types";
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import {
-    FollowActionType,
-    setCurrentPageActionType,
-    setTotalUsersCountActionType,
-    SetUsersActionType, toggleIsFetchingActionType
-} from "./users-reducer";
-
-export type UnionActionType =
-    AddMessageActionCreatorType
-    | UpdateNewMessageActionCreatorType
-    | AddPostActionCreatorType
-    | UpdateNewPostActionCreatorType
-    | FollowActionType
-    | SetUsersActionType
-    | setTotalUsersCountActionType
-    | setCurrentPageActionType
-    | toggleIsFetchingActionType;
 
 
 export const store: StoreType = {
@@ -28,7 +11,8 @@ export const store: StoreType = {
                 {id: '1', text: 'Hello world!', likesCount: 3},
                 {id: '2', text: 'It\'s my first message!', likesCount: 15},
             ],
-            newPostText: ''
+            newPostText: '',
+            profile: null,
         },
         dialogsPage: {
             dialogs: [

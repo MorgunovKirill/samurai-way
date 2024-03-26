@@ -1,4 +1,15 @@
-import {UnionActionType} from "../redux/store";
+import {AddMessageActionCreatorType, UpdateNewMessageActionCreatorType} from "../redux/dialogs-reducer";
+import {
+    AddPostActionCreatorType,
+    SetUserProfileActionCreatorType,
+    UpdateNewPostActionCreatorType
+} from "../redux/profile-reducer";
+import {
+    FollowActionType,
+    setCurrentPageActionType,
+    setTotalUsersCountActionType,
+    SetUsersActionType, toggleIsFetchingActionType
+} from "../redux/users-reducer";
 
 export type PostType = {
     id: string
@@ -23,13 +34,34 @@ export type FriendType = {
 
 export type ProfilePageType = {
     posts: PostType[],
-    newPostText: string
+    newPostText: string,
+    profile: ProfileType | null
+}
+
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
 }
 
 export type DialogPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
     newMessageText: string
+}
+
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
 }
 
 type PhotosType = {
@@ -71,3 +103,16 @@ export type RootStateType = {
     dialogsPage: DialogPageType
     sidebar: SideBarType
 }
+
+
+export type UnionActionType =
+    AddMessageActionCreatorType
+    | UpdateNewMessageActionCreatorType
+    | AddPostActionCreatorType
+    | UpdateNewPostActionCreatorType
+    | FollowActionType
+    | SetUsersActionType
+    | setTotalUsersCountActionType
+    | setCurrentPageActionType
+    | toggleIsFetchingActionType
+    | SetUserProfileActionCreatorType;

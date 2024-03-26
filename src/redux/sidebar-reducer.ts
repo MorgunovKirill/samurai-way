@@ -1,6 +1,4 @@
-import {SideBarType} from "../types";
-import {UnionActionType} from "./store";
-
+import {SideBarType, UnionActionType} from "../types";
 
 const initialState: SideBarType =  {
     friends: [
