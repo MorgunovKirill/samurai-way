@@ -23,9 +23,18 @@ export const ProfileInfo:FC<ProfileInfoPropsType> = ({profile}) => {
                     :
                     <img src="https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg" alt="avatar"/>
                 }
-                <p className={styles.description}>
-                    description
-                </p>
+                <div>
+                    <h2>{profile.fullName}</h2>
+                    <p>
+                       About me: {profile.aboutMe}
+                    </p>
+                    <p>
+                        Looking for a job: {profile.lookingForAJob ? 'Yes' : 'No'}
+                    </p>
+                    <p className={styles.description}>
+                        Description: {profile.lookingForAJobDescription}
+                    </p>
+                </div>
             </div>
         </>
     )
