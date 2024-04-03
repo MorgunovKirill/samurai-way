@@ -3,6 +3,7 @@ import UserPhoto from "../../assets/images/avatar-default.jpg";
 import React, {FC} from "react";
 import {UserType} from "../../types";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType = {
     users: UserType[]
@@ -58,11 +59,34 @@ export const Users: FC<UsersPropsType> = ({
                         </NavLink>
                         <div>
                             {
-                                u.followed ? <button onClick={() => follow(u.id, false)} type='button'>
-                                    Unfollow
-                                </button> : <button onClick={() => follow(u.id, true)} type='button'>
-                                    Follow
-                                </button>
+                                u.followed ? <button
+                                        onClick={() => {
+                                            axios.delete(
+                                                `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                                {withCredentials: true}).then((res) => {
+                                                if (res.data.resultCode === 0) {
+                                                    follow(u.id, false)
+                                                }
+                                            })
+                                        }
+                                        }
+                                        type='button'>
+                                        Unfollow
+                                    </button>
+                                    : <button
+                                        onClick={() => {
+                                            axios.post(
+                                                `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                                {},
+                                                {withCredentials: true}).then((res) => {
+                                                if (res.data.resultCode === 0) {
+                                                    follow(u.id, true)
+                                                }
+                                            })
+                                        }
+                                        } type='button'>
+                                        Follow
+                                    </button>
                             }
                         </div>
                     </div>

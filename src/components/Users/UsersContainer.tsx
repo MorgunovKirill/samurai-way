@@ -44,10 +44,12 @@ const mapStateToProps = (state: RootStateType): MapStatePropsType => {
 class UsersContainer extends React.Component<UsersPropsType> {
     getUsers = () => {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((res) => {
-            this.props.toggleIsFetching(false);
+        axios.get(
+            `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {withCredentials: true}).then((res) => {
             this.props.setUsers(res.data.items)
             this.props.setTotalUsersCount(res.data.totalCount)
+            this.props.toggleIsFetching(false);
         })
     }
 
@@ -58,7 +60,10 @@ class UsersContainer extends React.Component<UsersPropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((res) => {
+        axios.get(
+            `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {withCredentials: true}
+            ).then((res) => {
             this.props.setUsers(res.data.items)
             this.props.toggleIsFetching(false);
         })
