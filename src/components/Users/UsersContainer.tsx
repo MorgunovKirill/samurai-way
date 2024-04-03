@@ -1,17 +1,11 @@
 import {UserType} from "../../types";
 import {RootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {
-    follow,
-    setCurrentPage,
-    setTotalUsersCount,
-    setUsers,
-    toggleIsFetching
-} from "../../redux/users-reducer";
+import {follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching} from "../../redux/users-reducer";
 import React from "react";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader";
+import api from "../../api/api";
 
 type MapStatePropsType = {
     users: UserType[]
@@ -44,11 +38,9 @@ const mapStateToProps = (state: RootStateType): MapStatePropsType => {
 class UsersContainer extends React.Component<UsersPropsType> {
     getUsers = () => {
         this.props.toggleIsFetching(true);
-        axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            {withCredentials: true}).then((res) => {
-            this.props.setUsers(res.data.items)
-            this.props.setTotalUsersCount(res.data.totalCount)
+        api.fetchUsers(this.props.currentPage, this.props.pageSize).then((data) => {
+            this.props.setUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
             this.props.toggleIsFetching(false);
         })
     }
@@ -60,11 +52,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true);
-        axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            {withCredentials: true}
-            ).then((res) => {
-            this.props.setUsers(res.data.items)
+        api.fetchUsers(pageNumber, this.props.pageSize).then((data) => {
+            this.props.setUsers(data.items)
             this.props.toggleIsFetching(false);
         })
     }
