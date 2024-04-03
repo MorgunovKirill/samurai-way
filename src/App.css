@@ -14,6 +14,7 @@ img {
     /*grid-gap: 10px;*/
     max-width: 1200px;
     margin: 0 auto;
+    height: 100vh;
 }
 
 .app-wrapper-content {

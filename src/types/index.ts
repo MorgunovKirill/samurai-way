@@ -87,6 +87,13 @@ export type UsersPageType = {
     isFetching: boolean
 }
 
+export type AuthUserType = {
+    id: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean,
+}
+
 export type SideBarType = {
     friends: FriendType[]
 }
