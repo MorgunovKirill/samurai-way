@@ -3,7 +3,7 @@ import UserPhoto from "../../assets/images/avatar-default.jpg";
 import React, {FC} from "react";
 import {UserType} from "../../types";
 import {NavLink} from "react-router-dom";
-import api from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     users: UserType[]
@@ -12,6 +12,8 @@ type UsersPropsType = {
     currentPage: number,
     onPageChanged: (pageNumber: number) => void
     follow: (userId: number, followed: boolean) => void,
+    toggleFollowingProgress: (id: number, isFetching: boolean) => void,
+    followingInProgress: number[]
 }
 
 export const Users: FC<UsersPropsType> = ({
@@ -20,7 +22,9 @@ export const Users: FC<UsersPropsType> = ({
                                               pageSize,
                                               currentPage,
                                               onPageChanged,
-                                              follow
+                                              follow,
+                                              followingInProgress,
+                                              toggleFollowingProgress
                                           }) => {
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
@@ -61,25 +65,32 @@ export const Users: FC<UsersPropsType> = ({
                             {
                                 u.followed ? <button
                                         onClick={() => {
-                                            api.unFollowUser(u.id).then((data) => {
+                                            toggleFollowingProgress(u.id, true)
+                                            usersAPI.unFollowUser(u.id).then((data) => {
                                                 if (data.resultCode === 0) {
                                                     follow(u.id, false)
                                                 }
+                                                toggleFollowingProgress(u.id, false)
                                             })
                                         }
                                         }
+                                        disabled={followingInProgress.some((el)=> el === u.id)}
                                         type='button'>
                                         Unfollow
                                     </button>
                                     : <button
                                         onClick={() => {
-                                            api.followUser(u.id).then((data) => {
+                                            toggleFollowingProgress(u.id, true)
+                                            usersAPI.followUser(u.id).then((data) => {
                                                 if (data.resultCode === 0) {
                                                     follow(u.id, true)
                                                 }
+                                                toggleFollowingProgress(u.id, false)
                                             })
+                                            }
                                         }
-                                        } type='button'>
+                                        disabled={followingInProgress.some((el)=> el === u.id)}
+                                        type='button'>
                                         Follow
                                     </button>
                             }

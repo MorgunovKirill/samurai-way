@@ -6,9 +6,10 @@ import {
 } from "../redux/profile-reducer";
 import {
     FollowActionType,
-    setCurrentPageActionType,
-    setTotalUsersCountActionType,
-    SetUsersActionType, toggleIsFetchingActionType
+    SetCurrentPageActionType,
+    SetTotalUsersCountActionType,
+    SetUsersActionType, ToggleFollowingProgressActionType,
+    ToggleIsFetchingActionType
 } from "../redux/users-reducer";
 
 export type PostType = {
@@ -84,7 +85,8 @@ export type UsersPageType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress: number[]
 }
 
 export type AuthUserType = {
@@ -120,7 +122,8 @@ export type UnionActionType =
     | UpdateNewPostActionCreatorType
     | FollowActionType
     | SetUsersActionType
-    | setTotalUsersCountActionType
-    | setCurrentPageActionType
-    | toggleIsFetchingActionType
-    | SetUserProfileActionCreatorType;
+    | SetTotalUsersCountActionType
+    | SetCurrentPageActionType
+    | ToggleIsFetchingActionType
+    | SetUserProfileActionCreatorType
+    | ToggleFollowingProgressActionType;
