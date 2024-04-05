@@ -1,4 +1,6 @@
 import {UsersPageType, UserType} from "../types";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 const SET_USERS_ACTION = 'SET-USERS-ACTION'
 const FOLLOW_ACTION = 'FOLLOW-ACTION';
@@ -106,5 +108,33 @@ export const toggleFollowingProgress = (id: number, isFetching: boolean) => {
     } as const
 }
 
+export const getUsersTC = (currentPage: number, pageSize:number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true))
+    usersAPI.fetchUsers(currentPage, pageSize).then((data) => {
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+        dispatch(toggleIsFetching(false));
+    })
+}
+
+export const followTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgress(userId, true))
+    usersAPI.followUser(userId).then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(follow(userId, true))
+        }
+        dispatch(toggleFollowingProgress(userId, false))
+    })
+}
+
+export const unFollowTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgress(userId, true))
+    usersAPI.unFollowUser(userId).then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(follow(userId, false))
+        }
+        dispatch(toggleFollowingProgress(userId, false))
+    })
+}
 
 export default usersReducer;
