@@ -24,7 +24,7 @@ const mapStateToProps = (state: RootStateType): MapStatePropsType => {
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
     componentDidMount() {
-        authMeTC()
+        this.props.authMeTC()
     }
 
     render() {

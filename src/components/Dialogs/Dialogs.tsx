@@ -3,8 +3,9 @@ import styles from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
-const Dialogs:FC<DialogsPropsType> = ({dialogsPage, updateNewMessage, addMessage}) => {
+const Dialogs:FC<DialogsPropsType> = ({dialogsPage, updateNewMessage, addMessage, isAuth}) => {
     const addMessageHandler = () => {
         if (dialogsPage.newMessageText) {
             addMessage();
@@ -13,6 +14,8 @@ const Dialogs:FC<DialogsPropsType> = ({dialogsPage, updateNewMessage, addMessage
     const newMessageChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {
         updateNewMessage(evt.currentTarget.value)
     }
+
+    if (!isAuth) return  <Redirect to={'/login'} />
 
     return (
         <div className={styles.wrapper}>

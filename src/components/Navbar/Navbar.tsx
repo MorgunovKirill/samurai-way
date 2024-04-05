@@ -6,12 +6,15 @@ import {NavbarPropsType} from "./NavbarContainer";
 const Navbar: FC<NavbarPropsType> = (props) => {
     return (
         <div className={styles.nav}>
-            <nav >
+            <nav>
                 <div className={styles.item}>
                     <NavLink className={styles.link} activeClassName={styles.active} to="/profile">Profile</NavLink>
                 </div>
                 <div className={styles.item}>
                     <NavLink className={styles.link} activeClassName={styles.active} to="/dialogs">Messages</NavLink>
+                </div>
+                <div className={styles.item}>
+                    <NavLink className={styles.link} activeClassName={styles.active} to="/users">Users</NavLink>
                 </div>
                 <div className={styles.item}>
                     <NavLink className={styles.link} activeClassName={styles.active} to="/news">News</NavLink>
