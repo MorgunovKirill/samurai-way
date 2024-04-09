@@ -4,13 +4,15 @@ import MyPostsContainer from "../MyPosts/MyPostsContainer";
 import {ProfileType} from "../../types";
 
 type ProfilePagePropsType = {
-    profile: ProfileType
+    profile: ProfileType,
+    status: string,
+    updateUserStatus:  (status: string) => void,
 }
 
-const Profile:FC<ProfilePagePropsType> = ({profile}) => {
+const Profile:FC<ProfilePagePropsType> = ({profile, status, updateUserStatus}) => {
     return (
         <div>
-            <ProfileInfo profile={profile}/>
+            <ProfileInfo profile={profile} status={status} updateUserStatus={updateUserStatus}/>
             <MyPostsContainer />
         </div>
     )

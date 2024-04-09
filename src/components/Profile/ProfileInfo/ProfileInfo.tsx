@@ -5,11 +5,12 @@ import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 
 type ProfileInfoPropsType = {
-    profile: ProfileType
+    profile: ProfileType,
+    status: string,
+    updateUserStatus:  (status: string) => void,
 }
 
-export const ProfileInfo:FC<ProfileInfoPropsType> = ({profile}) => {
-    console.log(profile)
+export const ProfileInfo:FC<ProfileInfoPropsType> = ({profile, status, updateUserStatus}) => {
     return (
         <>
             <div className={styles.profileImg}>
@@ -19,7 +20,7 @@ export const ProfileInfo:FC<ProfileInfoPropsType> = ({profile}) => {
                     <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"/>
                 }
             </div>
-            <ProfileStatus status={profile.aboutMe} />
+            <ProfileStatus status={status} updateUserStatus={updateUserStatus} />
             {/*<div className={styles.descriptionContainer}>*/}
             {/*    {profile.photos.small ?*/}
             {/*        <img src={profile.photos.small}/>*/}

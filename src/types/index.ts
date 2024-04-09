@@ -1,6 +1,7 @@
 import {AddMessageActionCreatorType, UpdateNewMessageActionCreatorType} from "../redux/dialogs-reducer";
 import {
     AddPostActionCreatorType,
+    setStatusActionCreatorType,
     SetUserProfileActionCreatorType,
     UpdateNewPostActionCreatorType
 } from "../redux/profile-reducer";
@@ -8,7 +9,8 @@ import {
     FollowActionType,
     SetCurrentPageActionType,
     SetTotalUsersCountActionType,
-    SetUsersActionType, ToggleFollowingProgressActionType,
+    SetUsersActionType,
+    ToggleFollowingProgressActionType,
     ToggleIsFetchingActionType
 } from "../redux/users-reducer";
 
@@ -37,6 +39,7 @@ export type ProfilePageType = {
     posts: PostType[],
     newPostText: string,
     profile: ProfileType | null
+    status: string
 }
 
 export type ProfileType = {
@@ -126,4 +129,5 @@ export type UnionActionType =
     | SetCurrentPageActionType
     | ToggleIsFetchingActionType
     | SetUserProfileActionCreatorType
-    | ToggleFollowingProgressActionType;
+    | ToggleFollowingProgressActionType
+    | setStatusActionCreatorType;

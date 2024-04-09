@@ -13,6 +13,7 @@ export const store: StoreType = {
             ],
             newPostText: '',
             profile: null,
+            status: ''
         },
         dialogsPage: {
             dialogs: [
