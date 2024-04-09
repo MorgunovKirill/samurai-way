@@ -45,7 +45,9 @@ class ProfileContainer extends React.Component<WithRouterProfilePropsType> {
     }
 
     render() {
-        return this.props.profile ? <Profile profile={this.props.profile} status={this.props.status} updateUserStatus={updateUserStatusTC} /> : <Preloader/>
+        return this.props.profile ?
+            <Profile profile={this.props.profile} status={this.props.status} updateUserStatus={this.props.updateUserStatusTC}/> :
+            <Preloader/>
     }
 }
 

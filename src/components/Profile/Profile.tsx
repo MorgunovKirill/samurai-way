@@ -6,7 +6,7 @@ import {ProfileType} from "../../types";
 type ProfilePagePropsType = {
     profile: ProfileType,
     status: string,
-    updateUserStatus:  (status: string) => void,
+    updateUserStatus: (status: string) => void,
 }
 
 const Profile:FC<ProfilePagePropsType> = ({profile, status, updateUserStatus}) => {

@@ -7,7 +7,7 @@ import ProfileStatus from "../ProfileStatus/ProfileStatus";
 type ProfileInfoPropsType = {
     profile: ProfileType,
     status: string,
-    updateUserStatus:  (status: string) => void,
+    updateUserStatus: (status: string) => void,
 }
 
 export const ProfileInfo:FC<ProfileInfoPropsType> = ({profile, status, updateUserStatus}) => {
