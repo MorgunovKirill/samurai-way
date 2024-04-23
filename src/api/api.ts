@@ -1,4 +1,5 @@
 import axios from "axios";
+import {LoginType} from "../components/Login/Login";
 
 const instance = axios.create({
     withCredentials: true,
@@ -14,6 +15,11 @@ export const authApi = {
             return res.data
         });
     },
+    login(data: LoginRequestType) {
+        return instance.post(`/auth/login`, data).then((res) => {
+            return res.data
+        })
+    }
 }
 
 export const profileAPI = {
@@ -53,4 +59,8 @@ export const usersAPI = {
             return res.data
         })
     },
+}
+
+type LoginRequestType = LoginType & {
+    captcha?: boolean
 }

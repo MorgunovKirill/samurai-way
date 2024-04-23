@@ -1,6 +1,7 @@
 import {AuthUserType} from "../types";
 import {Dispatch} from "redux";
 import {authApi} from "../api/api";
+import {LoginType} from "../components/Login/Login";
 
 const SET_USER_DATA_ACTION = 'SET-USER-DATA-ACTION'
 
@@ -39,6 +40,14 @@ export const authMeTC = () => (dispatch: Dispatch) => {
         if(data.resultCode === 0) {
             const {id, login, email} = data.data
             dispatch(setAuthUserData(id, email, login))
+        }
+    })
+}
+
+export const loginTC = (data: LoginType) => (dispatch: Dispatch) => {
+    authApi.login(data).then((data) => {
+        if(data.resultCode === 0) {
+            console.log(data.data)
         }
     })
 }
