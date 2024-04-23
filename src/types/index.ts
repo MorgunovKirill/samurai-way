@@ -1,4 +1,4 @@
-import {AddMessageActionCreatorType, UpdateNewMessageActionCreatorType} from "../redux/dialogs-reducer";
+import {AddMessageActionCreatorType} from "../redux/dialogs-reducer";
 import {
     AddPostActionCreatorType,
     setStatusActionCreatorType,
@@ -120,7 +120,6 @@ export type RootStateType = {
 
 export type UnionActionType =
     AddMessageActionCreatorType
-    | UpdateNewMessageActionCreatorType
     | AddPostActionCreatorType
     | UpdateNewPostActionCreatorType
     | FollowActionType

@@ -1,18 +1,12 @@
 import {DialogPageType, UnionActionType} from "../types";
 
 const ADD_NEW_MESSAGE_ACTION = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_ACTION = 'UPDATE-NEW-MESSAGE';
 
-export const addMessage = () => {
-    return {type: ADD_NEW_MESSAGE_ACTION} as const
-}
-
-export const updateNewMessage = (newText: string) => {
-    return {type: UPDATE_NEW_MESSAGE_ACTION, newText} as const
+export const addMessage = (newMessage: string) => {
+    return {type: ADD_NEW_MESSAGE_ACTION, newMessage} as const
 }
 
 export type AddMessageActionCreatorType = ReturnType<typeof addMessage>
-export type UpdateNewMessageActionCreatorType = ReturnType<typeof updateNewMessage>
 
 const initialState: DialogPageType = {
     dialogs: [
@@ -39,11 +33,9 @@ const dialogsReducer = (state: DialogPageType = initialState, action: UnionActio
         case ADD_NEW_MESSAGE_ACTION:
             const newMessage = {
                 id: '6',
-                text: state.newMessageText,
+                text: action.newMessage,
             }
-            return {...state, messages: [...state.messages, newMessage], newMessageText: ''};
-        case UPDATE_NEW_MESSAGE_ACTION:
-            return {...state, newMessageText: action.newText};
+            return {...state, messages: [...state.messages, newMessage]};
         default:
             return state;
     }

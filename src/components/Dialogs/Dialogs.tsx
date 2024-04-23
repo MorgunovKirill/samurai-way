@@ -3,16 +3,20 @@ import styles from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
 import {DialogsPropsType} from "./DialogsContainer";
+import {useFormik} from "formik";
 
-const Dialogs:FC<DialogsPropsType> = ({dialogsPage, updateNewMessage, addMessage}) => {
-    const addMessageHandler = () => {
-        if (dialogsPage.newMessageText) {
-            addMessage();
+const Dialogs:FC<DialogsPropsType> = ({dialogsPage, addMessage}) => {
+    const formik = useFormik({
+        initialValues: {
+            newMessageText: '',
+        },
+        onSubmit: values => {
+            if (values.newMessageText) {
+                addMessage(values.newMessageText)
+            }
+            formik.resetForm()
         }
-    }
-    const newMessageChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-        updateNewMessage(evt.currentTarget.value)
-    }
+    })
 
     return (
         <div className={styles.wrapper}>
@@ -32,10 +36,21 @@ const Dialogs:FC<DialogsPropsType> = ({dialogsPage, updateNewMessage, addMessage
                         })
                     }
                 </div>
-                <textarea value={dialogsPage.newMessageText} onChange={newMessageChangeHandler}></textarea>
-                <div>
-                    <button type='button' onClick={addMessageHandler}>Add Post</button>
-                </div>
+                <form onSubmit={formik.handleSubmit}>
+                    {/*<textarea*/}
+                    {/*    value={dialogsPage.newMessageText}*/}
+                    {/*    onChange={newMessageChangeHandler}></textarea>*/}
+                    <textarea
+                        {...formik.getFieldProps('newMessageText')}
+                    ></textarea>
+                    <div>
+                        {/*<button*/}
+                        {/*    type='button'*/}
+                        {/*    onClick={addMessageHandler}>Add Post*/}
+                        {/*</button>*/}
+                        <button type='submit'>Add Post</button>
+                    </div>
+                </form>
             </div>
         </div>
     )
