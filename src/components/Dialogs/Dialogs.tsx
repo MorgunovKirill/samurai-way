@@ -1,14 +1,26 @@
-import React, {ChangeEvent, FC} from "react";
+import React, {FC} from "react";
 import styles from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
 import {DialogsPropsType} from "./DialogsContainer";
 import {useFormik} from "formik";
+import TextArea from "../common/TextArea";
+
+type FormikErrorType = {
+    newMessageText?: string
+}
 
 const Dialogs:FC<DialogsPropsType> = ({dialogsPage, addMessage}) => {
     const formik = useFormik({
         initialValues: {
             newMessageText: '',
+        },
+        validate: values => {
+            const errors: FormikErrorType = {}
+            if (!values.newMessageText) {
+                errors.newMessageText = 'Required'
+            }
+            return errors
         },
         onSubmit: values => {
             if (values.newMessageText) {
@@ -37,17 +49,13 @@ const Dialogs:FC<DialogsPropsType> = ({dialogsPage, addMessage}) => {
                     }
                 </div>
                 <form onSubmit={formik.handleSubmit}>
-                    {/*<textarea*/}
-                    {/*    value={dialogsPage.newMessageText}*/}
-                    {/*    onChange={newMessageChangeHandler}></textarea>*/}
-                    <textarea
+                    <TextArea
+                        error={formik.errors.newMessageText}
+                        touched={formik.touched.newMessageText}
+                        placeholder={'sdsd'}
                         {...formik.getFieldProps('newMessageText')}
-                    ></textarea>
+                    />
                     <div>
-                        {/*<button*/}
-                        {/*    type='button'*/}
-                        {/*    onClick={addMessageHandler}>Add Post*/}
-                        {/*</button>*/}
                         <button type='submit'>Add Post</button>
                     </div>
                 </form>

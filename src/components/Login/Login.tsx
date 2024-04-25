@@ -25,18 +25,18 @@ const Login: FC<LoginPropsType> = ({loginTC}) => {
             password: '',
             rememberMe: false,
         },
-        // validate: values => {
-        //     const errors: FormikErrorType = {}
-        //     if (!values.email) {
-        //         errors.email = 'Required'
-        //     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        //         errors.email = 'Invalid email address'
-        //     }
-        //     if (!values.password) {
-        //         errors.password = 'Required'
-        //     }
-        //     return errors
-        // },
+        validate: values => {
+            const errors: FormikErrorType = {}
+            if (!values.email) {
+                errors.email = 'Required'
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = 'Invalid email address'
+            }
+            if (!values.password) {
+                errors.password = 'Required'
+            }
+            return errors
+        },
         onSubmit: values => {
             loginTC(values)
             formik.resetForm()
@@ -52,12 +52,16 @@ const Login: FC<LoginPropsType> = ({loginTC}) => {
                         type="text"
                         {...formik.getFieldProps('email')}
                     />
+                    {formik.touched.email && formik.errors.email &&
+                        <div style={{color: 'red'}}>{formik.errors.email}</div>}
                 </div>
                 <div className={styles.formContainer}>
                     <input
                         type="password"
                         {...formik.getFieldProps('password')}
                     />
+                    {formik.touched.password && formik.errors.password &&
+                        <div style={{color: 'red'}}>{formik.errors.password}</div>}
                 </div>
                 <div className={styles.formContainer}>
                     <label>
