@@ -2,8 +2,7 @@ import {AddMessageActionCreatorType} from "../redux/dialogs-reducer";
 import {
     AddPostActionCreatorType,
     setStatusActionCreatorType,
-    SetUserProfileActionCreatorType,
-    UpdateNewPostActionCreatorType
+    SetUserProfileActionCreatorType
 } from "../redux/profile-reducer";
 import {
     FollowActionType,
@@ -37,7 +36,6 @@ export type FriendType = {
 
 export type ProfilePageType = {
     posts: PostType[],
-    newPostText: string,
     profile: ProfileType | null
     status: string
 }
@@ -121,7 +119,6 @@ export type RootStateType = {
 export type UnionActionType =
     AddMessageActionCreatorType
     | AddPostActionCreatorType
-    | UpdateNewPostActionCreatorType
     | FollowActionType
     | SetUsersActionType
     | SetTotalUsersCountActionType

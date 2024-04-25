@@ -3,7 +3,6 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
 const ADD_POST_ACTION = 'ADD-POST';
-const UPDATE_NEW_POST_ACTION = 'UPDATE-NEW-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_USER_STATUS = 'SET-USER-STATUS';
 
@@ -12,7 +11,6 @@ const initialState: ProfilePageType = {
         {id: '1', text: 'Hello world!', likesCount: 3},
         {id: '2', text: 'It\'s my first message!', likesCount: 15},
     ],
-    newPostText: '',
     profile: null,
     status: '',
 };
@@ -22,12 +20,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: UnionActi
         case ADD_POST_ACTION:
             const newPost = {
                 id: '5',
-                text: state.newPostText,
+                text: action.newPostText,
                 likesCount: 0
             }
-            return {...state, posts: [newPost, ...state.posts], newPostText: ''};
-        case UPDATE_NEW_POST_ACTION:
-            return {...state, newPostText: action.newText};
+            return {...state, posts: [newPost, ...state.posts]};
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
         case SET_USER_STATUS:
@@ -38,16 +34,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: UnionActi
 }
 
 export type AddPostActionCreatorType = ReturnType<typeof addPost>
-export type UpdateNewPostActionCreatorType = ReturnType<typeof updateNewPost>
 export type SetUserProfileActionCreatorType = ReturnType<typeof setUserProfile>
 export type setStatusActionCreatorType = ReturnType<typeof setStatus>
 
-export const addPost = () => {
-    return {type: ADD_POST_ACTION} as const
-}
-
-export const updateNewPost = (newText: string) => {
-    return {type: UPDATE_NEW_POST_ACTION, newText} as const
+export const addPost = (newPostText: string) => {
+    return {type: ADD_POST_ACTION, newPostText} as const
 }
 
 export const setUserProfile = (profile: ProfileType) => {

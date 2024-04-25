@@ -11,7 +11,6 @@ export const store: StoreType = {
                 {id: '1', text: 'Hello world!', likesCount: 3},
                 {id: '2', text: 'It\'s my first message!', likesCount: 15},
             ],
-            newPostText: '',
             profile: null,
             status: ''
         },

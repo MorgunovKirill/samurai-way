@@ -1,30 +1,33 @@
-import React, {ChangeEvent, FC, useRef} from "react";
+import React, {FC} from "react";
 import {Post} from "../Post/Post";
 import styles from "./MyPosts.module.css";
 import {MyPostsPropsType} from "./MyPostsContainer";
+import {useFormik} from "formik";
 
-export const MyPosts: FC<MyPostsPropsType> = ({profilePage, addPost, updateNewPostText}) => {
-    const onPostChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-        updateNewPostText(evt.currentTarget.value)
-    }
-
-    const addPostHandler = () => {
-        if (profilePage.newPostText) {
-            addPost();
+export const MyPosts: FC<MyPostsPropsType> = ({profilePage, addPost}) => {
+    const formik = useFormik({
+        initialValues: {
+            newPostText: ''
+        },
+        onSubmit: values =>  {
+            addPost(values.newPostText)
+            formik.resetForm()
         }
-    }
+    })
 
     return (
         <div className={styles.posts}>
-            <div>
+            <form onSubmit={formik.handleSubmit}>
                 My posts
                 <div>
-                    <textarea onChange={onPostChange} value={profilePage.newPostText}></textarea>
+                    <textarea
+                        {...formik.getFieldProps('newPostText')}
+                    ></textarea>
                 </div>
                 <div>
-                    <button onClick={addPostHandler}>Add Post</button>
+                    <button type='submit'>Add Post</button>
                 </div>
-            </div>
+            </form>
             <div>
                 {
                     profilePage.posts.map(post => {
