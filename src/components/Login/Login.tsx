@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import styles from './Login.module.css'
 import {useFormik} from "formik";
+import {Redirect} from "react-router-dom";
 
 type FormikErrorType = {
     email?: string
@@ -15,10 +16,11 @@ export type LoginType = {
 }
 
 type LoginPropsType = {
+    isAuth: boolean
     loginTC: (data: LoginType) => void
 }
 
-const Login: FC<LoginPropsType> = ({loginTC}) => {
+const Login: FC<LoginPropsType> = ({isAuth, loginTC}) => {
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -42,6 +44,8 @@ const Login: FC<LoginPropsType> = ({loginTC}) => {
             formik.resetForm()
         }
     })
+
+    if(isAuth) return <Redirect to={'/profile'} />
 
     return (
         <div className={styles.container}>

@@ -14,7 +14,8 @@ type PathParamsType = {
 
 type MapStatePropsType = {
     profile: ProfileType | null,
-    status: string
+    status: string,
+    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -30,7 +31,8 @@ type WithRouterProfilePropsType = RouteComponentProps<PathParamsType> & ProfileP
 const mapStateToProps = (state: RootStateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        isAuth: state.auth.isAuth
     }
 }
 
@@ -46,7 +48,10 @@ class ProfileContainer extends React.Component<WithRouterProfilePropsType> {
 
     render() {
         return this.props.profile ?
-            <Profile profile={this.props.profile} status={this.props.status} updateUserStatus={this.props.updateUserStatusTC}/> :
+            <Profile
+                isAuth={this.props.isAuth}
+                profile={this.props.profile}
+                status={this.props.status} updateUserStatus={this.props.updateUserStatusTC}/> :
             <Preloader/>
     }
 }

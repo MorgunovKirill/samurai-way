@@ -19,7 +19,12 @@ export const authApi = {
         return instance.post(`/auth/login`, data).then((res) => {
             return res.data
         })
-    }
+    },
+    logout() {
+        return instance.delete(`/auth/login`).then((res) => {
+            return res.data
+        })
+    },
 }
 
 export const profileAPI = {
